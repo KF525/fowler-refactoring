@@ -14,7 +14,7 @@ public class CustomerTest {
         customer.addRental(rental);
         String expected = "Rental Record for test\n" +
                 "\ttest title\t17.0\n" +
-                "Amount owed is 0.0\n" +
+                "Amount owed is 17.0\n" +
                 "You earned 1 frequent renter points";
         Assert.assertEquals(expected, customer.statement().trim());
     }
