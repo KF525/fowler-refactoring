@@ -28,4 +28,13 @@ public class CustomerTest {
         Assert.assertEquals(17, customer.getTotalCharge(), 0.0);
     }
 
+    @Test
+    public void getFrequentRenterPointsReturnsPointTotal() {
+        Movie movie = new Movie("test title", 0);
+        Rental rental = new Rental(movie, 12);
+        customer.addRental(rental);
+
+        Assert.assertEquals(1, customer.getFrequentRenterPoints(), 0.0);
+    }
+
 }
