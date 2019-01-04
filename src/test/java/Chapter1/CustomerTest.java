@@ -19,5 +19,13 @@ public class CustomerTest {
         Assert.assertEquals(expected, customer.statement().trim());
     }
 
+    @Test
+    public void getTotalChargeReturnsRentalTotal() {
+        Movie movie = new Movie("test title", 0);
+        Rental rental = new Rental(movie, 12);
+        customer.addRental(rental);
+
+        Assert.assertEquals(17, customer.getTotalCharge(), 0.0);
+    }
 
 }
