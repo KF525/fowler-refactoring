@@ -19,6 +19,10 @@ public class Customer {
         return this.name;
     }
 
+    private double amountFor(Rental rental) {
+        return rental.getCharge();
+    }
+
     public String statement(){
         double totalAmount = 0.0;
         int frequentRenterPoints = 0;
@@ -26,44 +30,21 @@ public class Customer {
         String result = "Rental Record for " + getName() + "\n";
         while (rentals.hasMoreElements()) {
             double thisAmount = 0;
-            Rental each = (Rental) rentals.nextElement();
-            thisAmount = amountFor(each);
+            Rental rental = (Rental) rentals.nextElement();
+            thisAmount = amountFor(rental);
 
             frequentRenterPoints++;
 
-            if ((each.getMovie().getPriceCode() == Movie.NEW_RELEASE) &&
-                    each.getDaysRented() > 1) frequentRenterPoints++;
+            if ((rental.getMovie().getPriceCode() == Movie.NEW_RELEASE) &&
+                    rental.getDaysRented() > 1) frequentRenterPoints++;
 
-            result += "\t" + each.getMovie().getTitle() + "\t" +
+            result += "\t" + rental.getMovie().getTitle() + "\t" +
                     String.valueOf(thisAmount) + "\n";
             totalAmount += totalAmount;
         }
 
         result += "Amount owed is " + String.valueOf(totalAmount) + "\n";
         result += "You earned " + String.valueOf(frequentRenterPoints) + " frequent renter points";
-        return result;
-    }
-
-    private double amountFor(Rental rental) {
-        double result = 0;
-        switch (rental.getMovie().getPriceCode()) {
-            case Movie.REGULAR:
-                result += 2;
-                if (rental.getDaysRented() > 2) {
-                    result += (rental.getDaysRented() - 2) * 1.5;
-                }
-                break;
-            case Movie.NEW_RELEASE:
-                result += rental.getDaysRented() * 3;
-                break;
-            case Movie.CHILDRENS:
-                result += 1.5;
-                if (rental.getDaysRented() > 3) {
-                    result += (rental.getDaysRented() - 3) * 1.5;
-                }
-                break;
-        }
-
         return result;
     }
 }
