@@ -18,4 +18,14 @@ public class MovieTest {
         Assert.assertEquals(1.5, movie2.getCharge(3), 0.0);
         Assert.assertEquals(3.0, movie2.getCharge(4), 0.0);
     }
+
+    @Test
+    public void getFrequentRenterPointsReturnsPoints() {
+        Movie movie0 = new Movie("title0", 0);
+        Movie movie1 = new Movie("title1", 1);
+
+        Assert.assertEquals(1, movie0.getFrequentRenterPoints(2));
+        Assert.assertEquals(1, movie1.getFrequentRenterPoints(1));
+        Assert.assertEquals(2, movie1.getFrequentRenterPoints(2));
+    }
 }

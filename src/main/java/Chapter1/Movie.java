@@ -25,8 +25,6 @@ public class Movie {
         return this.title;
     }
 
-    //Switch statement should not be done based on attribute of another object
-    //Switch statements should only happen when its your own data!
     public double getCharge(int daysRented) {
         double result = 0;
         switch (getPriceCode()) {
@@ -48,5 +46,14 @@ public class Movie {
         }
 
         return result;
+    }
+
+    public int getFrequentRenterPoints(int daysRented) {
+        if ((getPriceCode() == Movie.NEW_RELEASE) &&
+                daysRented > 1) {
+            return 2;
+        } else {
+            return 1;
+        }
     }
 }
