@@ -6,7 +6,7 @@ public class Movie {
     public static final int NEW_RELEASE = 1;
 
     private String title;
-    private int priceCode;
+    private Price priceCode;
 
     public Movie(String title, int priceCode) {
         this.title = title;
@@ -14,11 +14,23 @@ public class Movie {
     }
 
     public int getPriceCode() {
-        return this.priceCode;
+        return this.priceCode.getPriceCode();
     }
 
     public void setPriceCode(int arg) {
-        this.priceCode = arg;
+        switch (arg) {
+            case REGULAR:
+                this.priceCode = new RegularPrice();
+                break;
+            case NEW_RELEASE:
+                this.priceCode = new NewReleasePrice();
+                break;
+            case CHILDRENS:
+                this.priceCode = new ChildrensPrice();
+                break;
+            default:
+                throw new IllegalArgumentException("Incorrect Price Code");
+        }
     }
 
     public String getTitle() {
